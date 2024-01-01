@@ -1,0 +1,43 @@
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Document
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'results/style.css' %}">
+</head>
+<body>
+    <header> {% block header %}
+        <h2 class="logo">PetBell</h2>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="{% url 'contact' %}">Contact</a>
+            <button class="btnlogin-popup">Login</button>
+        </nav>
+        {% endblock header %}
+    </header>
+    
+<div id="content">
+    <div id="leftdiv">left div things</div>
+    <div class="topline"></div>
+    <div id="middlediv"><h2>middle contents here</h2>
+        <p>
+            {% block content %}
+
+            {% endblock content %}</p>
+            <span class="animate"></span>   
+        </div>
+    |<div id="rightdiv">right div contents come here</div>
+    |
+</div>
+<div id="footer">foooter things <br>
+    Copyright &#169 2023. Powered by PETBELL. <br>
+For himself by himself    </div>
+    
+</body>
+</html>

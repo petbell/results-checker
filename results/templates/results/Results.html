@@ -1,0 +1,14 @@
+{% extends "results/Baseresults.html" %}
+{% block title %} Contact Form {% endblock title %} 
+
+
+{% block content %}
+        <p>
+            <ul>
+                {% for row in data %}
+            <li>{{row}}
+            </li>
+            {% endfor %}
+        </ul>
+            </p>
+{% endblock content %}

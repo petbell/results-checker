@@ -1,0 +1,14 @@
+{% extends "results/Baseresults.html" %}
+{% block title %} Contact Form {% endblock title %} 
+
+
+{% block content %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+
+    {{form_key.as_p}}
+    <input class="btnlogin-popup" type="submit" value="Enter">
+        </form>
+
+{% endblock content %}

@@ -1,0 +1,25 @@
+
+{% extends "results/Baseresults.html" %}
+{% block title %} Result Checking Page {% endblock title %} 
+
+
+{% block content %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+
+    
+    {{form_key}}
+
+    <input class="btnlogin-popup" type="submit" value="Enter">
+    <!-- <label for="Student Number">Student Number</label>
+    <input type="text" name="txtstudentid">
+    <label for="Card PIN">Card PIN</label>
+    <input type="text" name="txtpin" id="">
+    <label for="Card Serial Number">Card Serial Number</label>
+    <input type="text" name="txtserial" id="">
+    <button type="submit">Get Result</button> -->
+    
+        </form>
+
+{% endblock content %}
