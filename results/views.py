@@ -1,8 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db import connection
 from .forms import ContactForm
 from .forms import ResultForm
+from .forms import LoginForm, SignUpForm
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
+# this decorator is for specifying views that need the user to be logged in first
+from django.contrib.auth.decorators import login_required 
 
 def index (request):
     return HttpResponse ("This is going to be my first django app again")
@@ -39,6 +44,8 @@ def contactView(request):
     }        
     return render (request, 'results/contact.html', context)
 
+# the login url has been set in settings.py
+@login_required
 def checkResult (request):
     if request.method == 'POST':
         form = ResultForm (request.POST)
@@ -95,3 +102,71 @@ def checkResult (request):
                 }
       
     return render (request, 'results/checkresult.html', context)
+
+
+def signupView(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        first_name = request.POST ['first_name']
+        last_name = request.POST ['last_name']
+        username = request.POST ['username']
+        email =     request.POST ['email']
+        password = request.POST ['password']
+        confirm_password = request.POST ['confirm_password']
+        
+        if password == confirm_password:
+            if User.objects.filter(username = username).exists():
+                messages.info (request,'Username already exists')
+                return redirect ('signup')
+            else:
+                user = User.objects.create_user(username=username, password=password, email= email, first_name = first_name, last_name = last_name)
+                user.set_password(password)
+                user.save()
+                print ("User created")
+                messages.info (request,user.username + "User successfully created")
+                return redirect ('login')
+        else:
+            messages.info (request, "Both passwords do not match!!!")
+            return redirect(signupView)
+    else:
+        print ("No post method")
+        
+        form = SignUpForm()
+        context = {
+            'form_key' : form
+        }
+        return render (request,'results/signup.html', context)
+
+def loginView (request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        uname = request.POST.get("username")
+        pword = request.POST.get ("password")
+        
+        user_data = auth.authenticate(username = uname, password = pword)
+        if user_data is not None:
+            auth.login(request, user_data)
+            print ('Welcome user')
+            messages.info (request, "welcome user " + user_data.username)
+            return redirect ('check')
+        else:
+            form = LoginForm()
+            context = {
+                'form_key' : form
+            }
+
+            #dispplays the message in a for loop added in the base template
+            messages.info (request, "Invalid username or password")
+            # take note of it being render and not redirect cos it is a GET
+            return render (request, 'results/login.html', context)
+    else:
+        form = LoginForm()
+        context = {
+            'form_key' : form
+        }
+        return render (request,'results/login.html', context)
+        
+def logoutView (request):
+    auth.logout (request)
+    return redirect ('login')
+

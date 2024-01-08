@@ -16,8 +16,10 @@
             <a href="#">Home</a>
             <a href="#">About</a>
             <a href="#">Services</a>
+            <a href="{% url 'check' %}">Check Result</a>
             <a href="{% url 'contact' %}">Contact</a>
-            <button class="btnlogin-popup">Login</button>
+            <a href="{% url 'signup' %}">Sign Up</a>
+            <a href= "{% url 'login' %}"><button class="btnlogin-popup" >Login</button></a>
         </nav>
         {% endblock header %}
     </header>
@@ -26,7 +28,28 @@
     <div id="leftdiv">left div things</div>
     <div class="topline"></div>
     <div id="middlediv"><h2>middle contents here</h2>
+
+        {%if request.user.is_authenticated %}
+    <p><h3> You are logged in!!! </h3> </p>
+    <p> Username : {{request.user.username}} </p>
+    <p> First Name : {{request.user.password}} </p>
+    <p> Last Name : {{request.user.last_name}} </p>
+    <a href= "{% url 'logout' %}" type= 'button'> Logout User </a>
+{% else %}
+    <p> User is logged out!!! </p>
+    <a href= "{% url 'signup' %}" type= 'button'> Sign UP </a>
+    <a href= "{% url 'login' %}" type= 'button'> Login </a>
+{% endif %}
         <p>
+            {% if messages %}
+            <ul>
+                {% for message in messages  %}
+                <li> {{message}} </li>
+
+                {% endfor %}
+            </ul>
+            
+            {% endif %}
             {% block content %}
 
             {% endblock content %}</p>

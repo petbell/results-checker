@@ -151,6 +151,25 @@ color: #350435;
     padding-top: 10px;
 }
 
+#middlediv .btnlogin-popup {
+    margin-top: 50px;
+}
+
+.formtext {
+/* #middlediv form p input [type=number] {
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+    background: transparent;
+    border: none;
+    outline: none; */
+    font-size: 1em;
+    color: #160110;
+    font-weight: 500;
+    padding: 0px 35px 0px 5px;
+    }
+
+
 #footer {
     position: absolute;
     background:transparent;
