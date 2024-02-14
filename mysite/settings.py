@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'stripee.apps.StripeeConfig',
+    'businessapp.apps.BusinessappConfig',
     'results.apps.ResultsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -126,3 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # this is the login view name for the @login_required decorator
 LOGIN_URL = 'login'
+
+#everything below is for stripe integration
+STRIPE_PUBLIC_KEY = "pk_test_51Obm3nCEL3dCjPQVC3BVtmpc8RcERMzwoiDhEnCkTR2qONeQL96OsFneBMwDryoSJNd5CvupLSiKT6Xb6PDJsTTu00ss30OSjr"
+STRIPE_SECRET_KEY = "sk_test_51Obm3nCEL3dCjPQV5Wtm4JgZjyNUt60IlUfU6O8A1iBZZBSm0ZewWgZUiR8kAOVpD6hNr2vSXjB9kCADjv0atY7t00YmJXfQJc"
+STRIPE_WEBHOOK_SECRET = 'whsec_48bc5c9417906b600e5c6a9dec3d6d549643a1f9695ff073d24a9880f04d5df0'
+# this is email backend to send mail to stripe customer
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

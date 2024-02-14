@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block title %} Result Checking Page {% endblock title %} 
+
+
+{% block content %}
+
+<h2> Calculate Bird Profit </h2>
+
+    
+   
+
+    
+    {{batch_keys.batchDate}}, 
+    {{batch_keys.batch_id}}, 
+    {{batch_keys.farm_name}}
+    
+
+    <P>
+       <table 
+    </p>
+    <!-- <label for="Student Number">Student Number</label>
+    <input type="text" name="txtstudentid">
+    <label for="Card PIN">Card PIN</label>
+    <input type="text" name="txtpin" id="">
+    <label for="Card Serial Number">Card Serial Number</label>
+    <input type="text" name="txtserial" id="">
+    <button type="submit">Get Result</button> -->
+    
+
+<label> {{request.batchDate}}</label>
+{% endblock content %}
+</body>
+</html>

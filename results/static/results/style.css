@@ -85,6 +85,11 @@ nav a:hover {
   } 
 
 
+nav :nth-last-child(1)::after{
+    
+    width: 0;
+}
+
 
 
 .btnlogin-popup {
@@ -107,6 +112,14 @@ background-color: #eee;
 color: #350435;
 }
 
+.errmessages {
+color: red;
+text-emphasis-color: maroon;
+font-size:1.5em;
+font-weight: 500;
+text-indent: inside;
+}
+
 
 #content {
     position: relative;
@@ -115,6 +128,7 @@ color: #350435;
     display: flex;
     /*justify-content: center;
     align-items: center; */
+    margin: 0;
 
     
 }
@@ -133,6 +147,7 @@ color: #350435;
 
 #middlediv {
     width: 800px;
+    height: fit-content;
     background-color:transparent;
     margin-left: 30px;
     border-left:solid violet;
@@ -155,6 +170,56 @@ color: #350435;
     margin-top: 50px;
 }
 
+.wrapper {
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0,0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* because of the close button in span below */
+    /* later disabled when working on registration form */
+   overflow: hidden;
+}
+
+.wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: hsl(206, 46%, 85%);
+    width: 45px;
+    height: 45px;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+    
+
+
+
+}
+
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px;
+
+}
+
+.form-box h2 {
+    font-size: 2em;
+color: hsl(206, 46%, 85%);
+text-align: center;
+}
+
 .formtext {
 /* #middlediv form p input [type=number] {
     width: 100%;
@@ -168,6 +233,110 @@ color: #350435;
     font-weight: 500;
     padding: 0px 35px 0px 5px;
     }
+
+    .input-box {
+        position: relative;
+        color: hsl(206, 46%, 85%);
+        width: 100%;
+        height: 50px;
+        border-bottom: 2px solid hsl(206, 46%, 85%);
+        margin: 30px;
+    }
+    
+    .input-box label {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        font-size: 1em;
+        color: hsl(206, 46%, 85%);
+        font-weight: 500;
+        pointer-events: none;
+        transition: .5s;
+    }
+    
+    .input-box input:focus~label,
+    .input-box input:valid~label {
+        /* after input box icon */
+        /* followed by transition above */
+        top: -5px;
+    }
+    
+    .input-box input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 1em;
+        color: hsl(206, 46%, 85%);
+        font-weight: 500;
+        padding: 0 35px 0 5px;
+    }
+    
+    .input-box .icon {
+        position: absolute;
+        right: 8px;
+        font-size: 1.2em;
+        color: hsl(206, 46%, 85%);
+        line-height: 57px;
+        
+    }
+
+    .remember-forgot {
+        font-size: 0.9em;
+        color: hsl(206, 46%, 85%);
+        font-weight: 500;
+        margin: -15px 0 15px;
+        display: flex;
+        justify-content: space-between;
+    
+    }
+    
+    .remember-forgot label input {
+        accent-color: hsl(206, 46%, 85%);
+        margin-right: 3px;
+    }
+    
+    .remember-forgot a {
+        color: hsl(206, 46%, 85%);
+        text-decoration: none;
+    }
+    
+    .remember-forgot a:hover{
+        text-decoration: underline;
+    }
+    
+    .btn {
+        width: 100%;
+        height: 45px;
+        color: #fff;
+        font-size: 1em;
+        font-weight: 500;
+        background: hsl(206, 46%, 85%);
+        border: none;
+        outline: none;
+        border-radius: 20px;
+    }
+    
+    .login-register {
+        font-size: .9em;
+        color: hsl(206, 46%, 85%);
+        text-align: center;
+        font-weight: 500;
+        margin: 25px 0 10px;
+    }
+    
+    .login-register p a {
+        text-decoration: none;
+        font-weight: 600;
+        color: hsl(206, 46%, 85%);
+    }
+    
+    .login-register p a:hover {
+        text-decoration: underline;
+    }
+    
 
 
 #footer {
@@ -198,6 +367,13 @@ color: #350435;
     
     
 }
+
+#middlediv .form-box {
+    width: 100%;
+    padding: 40px;
+}
+
+
 
 /*ANIMATION KEYFRAMES */
 @keyframes show-left {

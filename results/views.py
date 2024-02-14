@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from django.db import connection
 from .forms import ContactForm
 from .forms import ResultForm
-from .forms import LoginForm, SignUpForm
+from .forms import LoginForm, SignUpForm , CardForm
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 # this decorator is for specifying views that need the user to be logged in first
 from django.contrib.auth.decorators import login_required 
+from random import randint
 
 def index (request):
     return HttpResponse ("This is going to be my first django app again")
@@ -55,46 +56,88 @@ def checkResult (request):
             pin = data['cardpin']
             serial = data['serial']
             with connection.cursor() as cursor:
-                sql = '"SELECT * FROM TbCard WHERE pin = %s", [pin]' #the param does not work this way unless i hardcode it like below
-                cursor.execute("SELECT * FROM TbCard WHERE pin = %s AND serial = %s ", [pin, serial])
-                cardresult = cursor.fetchone()
-                # if a card exists, check if it has been used by the student
-                if cardresult:
-                    cursor.execute("SELECT * FROM TbTransact WHERE student_id = %s AND pin = %s",[student_id, pin] )
-                    transactresult = cursor.fetchone()
-                    if transactresult:
-                        #get result, update tbtransact
-                        cursor.execute("UPDATE TbTransact SET card_use = card_use+1 WHERE student_id = %s AND pin = %s", [student_id, pin])
-                        cursor.execute("SELECT * FROM TbResults WHERE student_id = %s",[student_id ])
-                        result = cursor.fetchone()
-                        context = {
-                            'form_key' : result
+                # first check if the student data is available
+                cursor.execute("SELECT * FROM TbResults WHERE student_id = %s",[student_id ])
+                checkStudent = cursor.fetchone()
+                if checkStudent:
+                    sql = '"SELECT * FROM TbCard WHERE pin = %s", [pin]' #the param does not work this way unless i hardcode it like below
+                    # need to look for a way to query the query
+                    cursor.execute("SELECT * FROM TbCard WHERE pin = %s AND serial = %s ", [pin, serial])
+                    cardresult = cursor.fetchone()
+                    # if a card exists, check if it has been used by the student
+                    if cardresult :
+                        # the column is referenced by index from the query result
+                        if cardresult [4] == 1:
+                            print (cardresult)
+                            # error message that card has been used more than 5 times.
+                            messages.info (request,'DEPLETED!! Card has already been used up to 5 times')
+                            form = ResultForm(request.POST)
+                            context = {
+                                'form_key' : form
                             }
-                        return render (request, 'results/checkresult.html', context)
+                            return render (request, 'results/checkresult.html', context)                            #(card already used by a different student)
+                            
+                        else:
+                            # query results with the  card pin first
+                            cursor.execute("SELECT * FROM TbTransact WHERE pin = %s",[pin] )
+                            transactresult = cursor.fetchone()
+                            # if the card has been used before, check if used by the same student, 
+                            # get the result and update tbtransact
+                            if transactresult:
+                                # the column is referenced by index from the query result
+                                if transactresult[1] != student_id :
+                                    messages.error (request, "Card already used for another student")
+                                    form = ResultForm(request.POST)
+                                    context = {
+                                        'form_key' : form
+                                    }
+                                    return render (request, 'results/checkresult.html', context)
+                                else:
+                                    #get result, update tbtransact
+                                    cursor.execute("UPDATE TbTransact SET card_use = card_use+1 WHERE student_id = %s AND pin = %s", [student_id, pin])
+                                    cursor.execute("SELECT * FROM TbResults WHERE student_id = %s",[student_id ])
+                                    result = cursor.fetchone()
+                                    # convert queryset into a dictionary of column name: value pairs 
+                                    desc = cursor.description
+                                    col_names = [col[0] for col in desc]
+                                    resultDict = dict(zip(col_names, result))
+                                    context = {
+                                    'form_key' : resultDict
+                                    }
+                                    return render (request, 'results/displayresult.html', context)
+                            
+                            else:
+                                #add form details to tbtransact and retrieve result
+                                cursor.execute("INSERT INTO TbTransact (student_id, pin, card_use) VALUES (%s,%s,1)", [student_id, pin])
+                                cursor.execute("SELECT * FROM TbResults WHERE student_id = %s",[student_id ])
+                                result = cursor.fetchone()
+                                # convert queryset into a dictionary of column name: value pairs 
+                                desc = cursor.description
+                                col_names = [col[0] for col in desc]
+                                resultDict = dict(zip(col_names, result))
+                                context = {
+                                    'form_key' : resultDict
+                                    }
+                                return render (request, 'results/displayresult.html', context)
                     else:
-                        #add form details to tbtransact and retrieve result
-                        cursor.execute("INSERT INTO TbTransact (student_id, pin, card_use) VALUES (%s,%s,1)", [student_id, pin])
-                        cursor.execute("SELECT * FROM TbResults WHERE student_id = %s",[student_id ])
-                        result = cursor.fetchone()
+                        #show form and error message, wrong card 
+                        messages.info (request, 'The card is invalid, check the nummbers and try again')
+                        form = ResultForm(request.POST)
                         context = {
-                            'form_key' : result
-                            }
+                            'form_key' : form
+                        }
                         return render (request, 'results/checkresult.html', context)
+                
                 else:
-                    #show form and error message, wrong card
-                    form = ResultForm()
+                    messages.error(request, "Student result not available. Check the number and try again")
+                    form = ResultForm(request.POST)
                     context = {
                         'form_key' : form
                     }
                     return render (request, 'results/checkresult.html', context)
-               
-                context = {
-        'form_key' : transactresult
-                }
-                return render (request, 'results/checkresult.html', context)
-            
-            #return HttpResponse(pin)
-            
+                
+                #return HttpResponse(pin)
+                
     else:
         form = ResultForm()
     context = {
@@ -127,7 +170,7 @@ def signupView(request):
                 return redirect ('login')
         else:
             messages.info (request, "Both passwords do not match!!!")
-            return redirect(signupView)
+            return redirect('signup')
     else:
         print ("No post method")
         
@@ -170,3 +213,27 @@ def logoutView (request):
     auth.logout (request)
     return redirect ('login')
 
+
+def createCardView (request):
+    if request.method == 'POST':
+        form = CardForm(request.POST)
+        number_of_card = int(request.POST.get('number_of_card'))
+        makeCard(number_of_card)
+        return HttpResponse ( "cards succesfully produced")
+    else:
+        form = CardForm()
+        context = {
+            'form_key' : form
+        }
+        return render(request, 'results/makepin.html', context)        
+        
+
+
+
+def makeCard(number_of_card):
+    for i in range(0,number_of_card):
+        cardpin = randint(100000000000, 999999999999)
+        with connection.cursor() as cursor:
+            cursor.execute ("INSERT INTO TbCard (pin) VALUES (%s)", [cardpin])
+            
+            

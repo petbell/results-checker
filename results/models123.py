@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class TbResults(models.Model):
@@ -18,4 +19,4 @@ class TbCard(models.Model):
     expiry = models.DateTimeField(print_date,  '+3months')
     used = models.BooleanField(default= False)
     
-    
+class  resultset(form):

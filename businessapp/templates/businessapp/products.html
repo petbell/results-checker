@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <h2> Products List </h2>
+{% for each_product in all_products_key %}
+    <div class="card mt-4" style="width: 18rem;">
+        <img class="card-img-top" src="{{each_product.image.url}}" alt="Card image cap" width=300px height=648px>
+        <div class="card-body">
+          <h5 class="card-title">{{each_product.product_name}}</h5>
+          <p class="card-text">{{each_product.product_description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{each_product.price}}</li>
+          <li class="list-group-item">{{each_product.date_added}}</li>
+          <li class="list-group-item">{{each_product.updated}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+      {% endfor %}
+      
+    
+</body>
+</html>

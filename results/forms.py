@@ -17,8 +17,8 @@ class ResultForm (forms.Form):
     
     
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class':'formtext'}))
-    password = forms.CharField(max_length=30,widget=forms.PasswordInput (attrs={'class':'formtext'}))      
+    username = forms.CharField(max_length=30, widget=forms.TextInput())
+    password = forms.CharField(max_length=30,widget=forms.PasswordInput ())      
     
     
     class Meta:
@@ -35,3 +35,9 @@ class SignUpForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username',  'email', 'password']
+
+
+class CardForm (forms.Form):
+    number_of_card = forms.IntegerField (label="Number of Cards")
+    
+    

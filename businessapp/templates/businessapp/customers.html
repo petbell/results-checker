@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <h1> Customers List </h1>
+{% for each_customer in all_customers_key %}
+<div class="card" style="width: 18rem;">
+    <div class="card-header"><h2><label>Customer Name : </label>
+      {{each_customer.cust_first_name}} {{each_customer.cust_last_name}}
+    </h2>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><label>Customer Phone : </label>{{each_customer.phone}}</li>
+      <li class="list-group-item"><label>Customer Email : </label>{{each_customer.email}}</li>
+      <li class="list-group-item"><label>Customer Sex : </label>{{each_customer.gender}}</li>
+      <li class="list-group-item"><label>Age of Customer : </label>{{each_customer.age}}</li>
+    </ul>
+  </div>
+      {% endfor %}
+      
+    
+</body>
+</html>

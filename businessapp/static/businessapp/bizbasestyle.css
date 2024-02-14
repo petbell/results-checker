@@ -1,0 +1,93 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+body{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: block;
+}
+
+.formbox {
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    background: #777;
+    padding: 50px 10% 0;
+    }
+
+input {
+    position: relative;
+    padding-left: 10px;
+    margin-right: 30px;
+    align-self: center;
+    clear: right;
+}
+
+label {
+    margin-right: 20px;
+    font-size: 16px;
+    clear: left;
+}
+
+form {
+    /*display: grid;
+    grid-template-columns: 200px 300px 200px;
+    grid-template-rows: 40px 40px 40px 40px;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px; */
+    display: flexbox;
+    flex-direction: column;
+    justify-content: center;
+    flex: 0 1 auto;
+    height: fit-content;
+    background: cyan;
+    margin-bottom: 10px;
+    padding: 10px 5px;
+    border-radius: 30px;
+    box-shadow:5px 10px 20px 10px goldenrod, 5px 5px blue;
+}
+
+table {
+    border-radius: 20px;
+    overflow: hidden;
+}
+table, th {
+    border: 2px solid magenta; 
+}
+
+tbody td:nth-child(even){
+    background-color: turquoise;
+
+}
+
+td {
+    padding:  5px 15px;
+}
+
+td:nth-child(1){
+    font-size: 20px;
+    font-weight: 500;
+    color: firebrick;
+    text-decoration: double;
+    background-color: bisque;
+    
+}
+
+table thead th {
+    align-self: center;
+    color: bisque;
+    font-weight: 700;
+    height: 2em;
+}
+
+th {
+    background: darkblue;
+}

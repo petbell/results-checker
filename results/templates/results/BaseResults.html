@@ -35,16 +35,19 @@
     <p> First Name : {{request.user.password}} </p>
     <p> Last Name : {{request.user.last_name}} </p>
     <a href= "{% url 'logout' %}" type= 'button'> Logout User </a>
+    <span class="icon"><ion-icon name="log-out"></ion-icon></span
 {% else %}
     <p> User is logged out!!! </p>
     <a href= "{% url 'signup' %}" type= 'button'> Sign UP </a>
+    <span class="icons"><ion-icon name="person-add"></ion-icon></span>
     <a href= "{% url 'login' %}" type= 'button'> Login </a>
+    <span class = "icon"><ion-icon name="log-in"></ion-icon></span>
 {% endif %}
         <p>
             {% if messages %}
-            <ul>
+            <ul >
                 {% for message in messages  %}
-                <li> {{message}} </li>
+                <li class="errmessages"> {{message}} </li>
 
                 {% endfor %}
             </ul>
@@ -61,6 +64,7 @@
 <div id="footer">foooter things <br>
     Copyright &#169 2023. Powered by PETBELL. <br>
 For himself by himself    </div>
-    
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

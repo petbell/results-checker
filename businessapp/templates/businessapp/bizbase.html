@@ -1,0 +1,88 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'businessapp/bizbasestyle.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div class="formbox">
+        <form action="">
+        <label for="">name</label>
+        <input type="text" name="" id="" placeholder="name">
+
+        <label for="">another name</label>
+        <input type="text" name="" id="">
+<p>Lorem ipsum dolor, sit amet consectetur 
+    adipisicing elit. Obcaecati veritatis fugit cumque libero itaque maiores 
+    nam deserunt incidunt optio. Placeat libero quas earum aliquid consequuntur 
+    culpa reiciendis eaque eius laudantium!</p>
+        <input type="submit" value="submit">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+            <th colspan=2>Field Values</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Batch Date</td>
+                <td>{{batch_keys.batchDate}}</td>    
+            </tr>
+
+            <tr>
+                <td>Batch Number</td>
+                <td>{{batch_keys.batch_id}}</td>    
+            </tr>
+            <tr>
+                <td>Farm Name</td>
+                <td>{{batch_keys.farm_name}}</td>    
+            </tr>
+            <tr>
+                <td>Number of Birds</td>
+                <td>{{batch_keys.bird_number}}</td>    
+            </tr>
+            <tr>
+                <td>Week</td>
+                <td>{{batch_keys.week}}</td>    
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+            <th colspan= 2>Computed Values</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Cost of feed</td>
+                <td>&#8358 {{batch_keys.feedCost}} </td>    
+            </tr>
+            <tr>
+                <td>1st Vaccination Date</td>
+                <td>&#x20a6 {{batch_keys.firstVacc}}</td>    
+            </tr>
+            <tr>
+                <td>2nd Vaccination Date</td>
+                <td>{{batch_keys.secondVacc}}</td>    
+            </tr>
+            <tr>
+                <td>Third Vaccination Date</td>
+                <td>{{batch_keys.thirdVacc}}</td>    
+            </tr>
+            <tr>
+                <td>Fourth Vaccination Date</td>
+                <td>{{batch_keys.fourthVacc}}</td>    
+            </tr>
+    </table>
+    
+    {{ batch_keys}}
+    
+    </div>
+
+    
+</body>
+</html>

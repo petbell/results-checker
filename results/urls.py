@@ -9,5 +9,6 @@ urlpatterns = [
     path ("check/", views.checkResult, name= 'check'),
     path ("signup/", views.signupView, name= 'signup'),
     path ("login/", views.loginView, name= 'login'),
-    path ("logout/", views.logoutView, name= 'logout')
+    path ("logout/", views.logoutView, name= 'logout'),
+    path ("makepin/", views.createCardView, name= 'makepin')
 ]

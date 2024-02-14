@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../../../../DS Tutorial"
+		},
+		{
+			"path": "../../../../navbar"
+		},
+		{
+			"path": "../../../../html"
+		},
+		{
+			"path": "../../../../flask"
+		},
+		{
+			"path": "../../.."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "html"
+	}
+}
