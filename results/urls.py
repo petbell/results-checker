@@ -13,4 +13,5 @@ urlpatterns = [
     path ("makepin/", views.createCardView, name= 'makepin'),
     path ("keyslol/", views.keysLolListView.as_view(), name= 'keyslol'),
     
+    
 ]

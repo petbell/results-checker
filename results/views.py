@@ -107,7 +107,7 @@ def checkResult (request):
                                     return render (request, 'results/checkresult.html', context)
                                 else:
                                     #get result, update tbtransact
-                                    cursor.execute("UPDATE TbTransact SET card_use = card_use+1 WHERE student_id = %s AND pin = %s", [student_id, pin])
+                                    cursor.execute("UPDATE TbTransact SET card_use=card_use +1 WHERE student_id = %s AND pin = %s", [student_id, pin])
                                     cursor.execute("SELECT * FROM TbResults WHERE student_id = %s",[student_id ])
                                     result = cursor.fetchone()
                                     
