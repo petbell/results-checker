@@ -1,7 +1,7 @@
-student_id,student_name,Maths,English,Economics,Biology,Total,Grade
-124,Xavier,68,56,56,69,249,
-125,Abu,98,58,56,65,277,
-126,Soludo,88,96,57,53,294,
-127,Magnus,28,69,85,36,218,
-128,Saddam,57,86,58,96,297,
-129,,,,,,,
+student_id,student_name,Maths,English,Economics,Biology,Total,Avscore,Grade
+120,Peter,85,44,74,54,257,64,C4
+121,Xavier,98,76,86,84,344,86,A1
+122,Bola,75,65,46,84,270,67,B3
+123,sUNNUYY,67,28,81,74,250,62,C4
+124,Loco,87,53,73,23,236,59,C5
+125,Beolo,39,93,74,63,269,67,B3

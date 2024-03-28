@@ -1,6 +1,6 @@
-{% extends "results/Baseresults.html" %}
+{% extends "results/Djangobase.html" %}
 {% block title %} Registration Form {% endblock title %} 
-
+{%load static %}
 
 {% block content %}
 <div class="wrapper">
@@ -27,7 +27,7 @@
         <div class="login-register">
            
             <p>Don't have an account?
-                <a href="#" class="register-link">Register Here</a>
+                <a href="{% url 'signup' %}" class="register-link">Register Here</a>
             </p>
             
         </div>
@@ -37,8 +37,14 @@
     
 </form>
 </div>
+
+
 </div>
-<!--<form class='form-box login' method="POST" action="">
+<!--{%block script %}
+<script type="text/javascript" src="{% static 'results/logscript.js' %}"></script>
+{% endblock %}
+
+<form class='form-box login' method="POST" action="">
     {% csrf_token %}
 
     {{form_key.as_div}}

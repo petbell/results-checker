@@ -18,8 +18,8 @@ body {
     /*clear: both;
     width: 100%;
     padding: 0; */
-    /*background-color:#350435;*/
-    background-color:#ecdfec;
+    background-color:#350435;
+    /*background-color:#ecdfec;*/
     background-size: cover;
     
     min-height: 100vh;
@@ -29,92 +29,93 @@ body {
 
 header {
     position: absolute;
-    /*background-color:chartreuse; */
     top: 0;
     left: 0;
     width: 100%;
-    margin: 0;
-    padding: 20px 100px;
+    padding: 5px 100px 10px 50px;
+    /* remove background after finishing with body */
+    background: #691883;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: center;
-    z-index: 99;
-    }
-
-    .logo {
-        font-size: 2em;
-        color: #eee;
-        user-select: none;
-    }
-
-nav {
-    position: relative;
-    }
-
-nav a {
-    position: relative;
-    /* this position rule above is neccesary to create 
-     that underline hover effect on your a tags 
-     it took me 2 hours to figure out*/
-    margin-left: 40px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #eee;
-    font-weight: 600;
-    margin: 0 20px;
-    
+    z-index: 9;
 }
 
-nav a::after {
-    content: '';
+.logo {
+    font-size: 2em;
+    color: #fff;
+    user-select: none;
+}
+
+.navigation {
+    padding-right: 50px;
+    min-width: fit-content;
+    display: inline-block;
+    justify-content: space-evenly ;
+    align-items: center;
+    }
+
+
+
+.navigation a  {
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 40px;
+    right: 400px;
+    align-self: center;
+    top: 30px;
+    white-space: nowrap; 
+        display: inline;
+}
+
+.navigation a::after  {
     position: absolute;
+    content:' ';
+    left: 0px;
+    bottom: -6px;
     width: 100%;
-    left: 0;
     height: 3px;
-    background: #eee;
+    background: #fff;
     border-radius: 5px;
-    bottom: -4px;
     transform-origin: right;
     transform: scaleX(0);
-    transition: transform 1s;
+    transition: transform .5s;
 }
 
-nav a:hover:after {
+.navigation a:hover::after {
     transform-origin: left;
     transform: scaleX(1);
+
 }
 
-nav a:hover {
-   color: violet;
-  } 
-
-
-nav :nth-last-child(1)::after{
-    
-    width: 0;
-}
-
-
-
-.btnlogin-popup {
+.navigation .btnlogin-popup {
     width: 130px;
     height: 40px;
-    margin-left: 40px;
-    padding: 5px 25px ;
-    background-color: transparent;
-    outline: none;
-    font-size: 1.1em;
-    color: #eee;
+    background: transparent;
     border: 2px solid;
-    border-radius: 60px;
+    outline: none;
+    border-radius: 6px;
     cursor: pointer;
-    transition: .5s;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 100px;
+    /*after .navigation .btnlogin-popup:hover
+ */
+ transition: 0.5s;
+ margin-bottom: 10px;
 }
 
-.btnlogin-popup:hover {
-background-color: #eee;
-color: #350435;
+.navigation .btnlogin-popup:hover {
+    background: #fff;
+    color: #162938;
 }
+
+
+
 
 .errmessages {
 color: red;
@@ -156,7 +157,7 @@ text-indent: inside;
     height: fit-content;
     background-color:transparent;
     margin-left: 30px;
-    border-left:solid violet;
+    border-left:solid #350435;
     border-width: 5px;
     /*border-left: #1b1636; */
     margin-top: -30px;
@@ -179,7 +180,7 @@ text-indent: inside;
 .wrapper {
     position: relative;
     width: 400px;
-    height: 440px;
+    height: fit-content; /*440px */
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .5);
     border-radius: 20px;
@@ -193,11 +194,12 @@ text-indent: inside;
    overflow: hidden;
 }
 
+
 .wrapper .icon-close {
     position: absolute;
     top: 0;
     right: 0;
-    background: hsl(206, 46%, 85%);
+    background: hsl(307, 100%, 5%);
     width: 45px;
     height: 45px;
     font-size: 2em;
@@ -220,11 +222,46 @@ text-indent: inside;
 
 }
 
+.wrapper .form-box.login{
+    /* disable this after .wrapper .form-box.register   */  
+    /* remember it was hidden when designing the register form */
+        /*display: none;*/
+        /*the following comes after doing .wrapper.active .form-box.login below */
+        transition: transform 2s ease;
+        transform: translateX(0);
+    }
+    /* contiue from above after js scripting */
+
+    /* the following would be uncommented to make swapping forms on one page */
+/*.wrapper.active .form-box.login {
+        transition: none;
+        transform: translateX(-400px);
+    
+    } 
+    
+    
+
+.wrapper .form-box.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+    
+} */
+
+.wrapper.active .form-box.register {
+    /* just copy .wrapper .form-box.login  */  
+/* then add transition: none to the above rule */
+    transition: transform 1s ease;
+    transform: translateX(0);
+}
+
+
 .form-box h2 {
     font-size: 2em;
 color: hsl(206, 46%, 85%);
 text-align: center;
 }
+
 
 .formtext {
 /* #middlediv form p input [type=number] {
@@ -343,7 +380,17 @@ text-align: center;
         text-decoration: underline;
     }
     
-
+    #content .topline {
+        position: absolute;
+        top: 20px;
+        left: 7%;
+        width: 100%;
+        border-bottom: solid;
+        border-color:rgb(230, 44, 189);
+        border-width: 5px;
+        margin-top: 0px;
+        
+    }
 
 
 .animate {
@@ -373,6 +420,24 @@ text-align: center;
         width: 0;
     }
     }
+
+/* table style */
+.wrapper tbody tr {
+    border: 1px solid magenta;
+}
+
+tbody tr:nth-child(odd){
+    background-color: turquoise;
+
+}
+
+table thead th {
+    align-self: center;
+    color: bisque;
+    font-weight: 700;
+    text-align: center;
+    background-color: magenta;
+    } 
 
 
 footer {
@@ -416,14 +481,14 @@ footer {
     
 .col h3 {
         width: fit-content;
-        margin-bottom: 10px;
+        margin-bottom: 7px;
         position: relative;
     }
     
 .email-id {
         width: fit-content;
-        border-bottom: 1px solid #ccc;
-        margin: 5px 10px;
+        border-bottom: none;
+        margin: 5px 0px;
     }
     
 ul li {
@@ -437,11 +502,11 @@ ul li a {
     }
     
 footer form {
-        padding-bottom: 10px;
+        padding-bottom: 7px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom:  1px solid |#ccc;
+        border-bottom:  1px solid #ccc;
         margin-bottom : 10px;
     }
     
@@ -486,7 +551,7 @@ footer hr {
         width: 90%;
         border: 0;
         border-bottom: 1px solid #ccc;
-        margin: 5px auto;
+        margin: 2px auto;
     }
     
 .copyright {
@@ -517,7 +582,26 @@ footer hr {
         left: 10px;
         animation: moving 2s linear infinite;
         }
+
+        
+/* animation for middlediv left border */
+.animcontent{
+    position: absolute;
     
+    width: 5px;
+    height:calc(100% + 10px);
+    /* background-color:salmon; */
+    margin-left: -35px; 
+    border-left:solid violet;
+    border-width: 5px;
+    content: '';
+    animation: load-up  6s ease-in-out reverse forwards;
+    animation: name duration timing-function delay iteration-count direction fill-mode;
+    bottom: 0;
+   
+        
+        
+}
 @keyframes moving {
         0% {
             left: -20%;
@@ -526,6 +610,16 @@ footer hr {
         100% {
             left: 100%;
         }
+    }
+
+    @keyframes load-up {
+        100% {
+            /*scale: 1; */
+            height: 0%;
+            
+        }
+
+        
     }
     
 @media (max-width : 700px) {

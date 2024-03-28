@@ -10,5 +10,7 @@ urlpatterns = [
     path ("signup/", views.signupView, name= 'signup'),
     path ("login/", views.loginView, name= 'login'),
     path ("logout/", views.logoutView, name= 'logout'),
-    path ("makepin/", views.createCardView, name= 'makepin')
+    path ("makepin/", views.createCardView, name= 'makepin'),
+    path ("keyslol/", views.keysLolListView.as_view(), name= 'keyslol'),
+    
 ]

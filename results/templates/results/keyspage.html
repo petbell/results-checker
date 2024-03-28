@@ -1,0 +1,45 @@
+{% extends "results/Djangobase.html" %}
+{% block title %} Registration Form {% endblock title %} 
+{%load static %}
+
+{% block content %}
+<div class="wrapper">
+<h2> Wallets </h2>
+
+</div>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <button type= "submit"> random </button>
+</form>
+<h3>{{pkPage_key}} of 904625697166532776746648320380374280103671755200316906558262375061821325312 </h3>
+<br>
+<ul>
+    {% for wallet in wallets_key%}    
+    <li><p>Private Key: {{wallet.0}}</p> - Wallet Address:  <a href="https://bscscan.com/address/{{wallet.1}}">{{wallet.1}}</a> </li>
+    {% empty%}
+    <li> No wallets yet </li>
+    {% endfor%}
+</ul>
+
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <button type= "submit"> random </button>
+</form>
+
+
+
+
+<!--{%block script %}
+<script type="text/javascript" src="{% static 'results/logscript.js' %}"></script>
+{% endblock %}
+
+<form class='form-box login' method="POST" action="">
+    {% csrf_token %}
+
+    {{form_key.as_div}}
+    <input class="btnlogin-popup" type="submit" value="Enter">
+        </form>
+
+{% endblock content %} -->

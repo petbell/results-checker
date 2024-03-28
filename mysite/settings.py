@@ -135,3 +135,8 @@ STRIPE_SECRET_KEY = "sk_test_51Obm3nCEL3dCjPQV5Wtm4JgZjyNUt60IlUfU6O8A1iBZZBSm0Z
 STRIPE_WEBHOOK_SECRET = 'whsec_48bc5c9417906b600e5c6a9dec3d6d549643a1f9695ff073d24a9880f04d5df0'
 # this is email backend to send mail to stripe customer
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+#everything following is for flutterwave integration
+RAVE_PUBLIC_KEY = "FLWPUBK_TEST-f6d0ba789495635a06c1c0aaa1b3ace6-X"
+RAVE_SECRET_KEY = "FLWSECK_TEST-026bad446136a159ad404a127b8ff81c-X"
+RAVE_ENCRYPTION_KEY = "FLWSECK_TEST62d0965f4385"
