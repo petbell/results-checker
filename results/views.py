@@ -60,6 +60,13 @@ def contactView(request):
 
 # the login url has been set in settings.py
 @login_required
+
+
+
+
+
+
+
 def checkResult (request):
     if request.method == 'POST':
         form = ResultForm (request.POST)
@@ -107,7 +114,7 @@ def checkResult (request):
                                     return render (request, 'results/checkresult.html', context)
                                 else:
                                     #get result, update tbtransact
-                                    cursor.execute("UPDATE TbTransact SET card_use=card_use +1 WHERE student_id = %s AND pin = %s", [student_id, pin])
+                                    cursor.execute("UPDATE TbTransact SET carduse=carduse +1 WHERE student_id = %s AND pin = %s", [student_id, pin])
                                     cursor.execute("SELECT * FROM TbResults WHERE student_id = %s",[student_id ])
                                     result = cursor.fetchone()
                                     
@@ -116,21 +123,21 @@ def checkResult (request):
                                     col_names = [col[0] for col in desc]
                                     resultDict = dict(zip(col_names, result))
                                     
-                                    cursor.execute("SELECT card_use FROM TbTransact WHERE student_id = %s AND pin = %s", [student_id, pin])
+                                    cursor.execute("SELECT carduse FROM TbTransact WHERE student_id = %s AND pin = %s", [student_id, pin])
                                     cardUse = cursor.fetchone()
-                                    card_use = cardUse[0]
+                                    card_use = cardUse[0] if cardUse else None
                                     
                                     context = {
                                     'form_key' : resultDict,
                                     'use_key' : card_use
                                     }
-                                    print (card_use)
-                                    print (context)
+                                    print (f"this is {card_use}")
+                                    print (f"Context is {context}")
                                     return render (request, 'results/displayresult.html', context)
                             
                             else:
                                 #add form details to tbtransact and retrieve result
-                                cursor.execute("INSERT INTO TbTransact (student_id, pin, card_use) VALUES (%s,%s,1)", [student_id, pin])
+                                cursor.execute("INSERT INTO TbTransact (student_id, pin, carduse) VALUES (%s,%s,1)", [student_id, pin])
                                 cursor.execute("SELECT * FROM TbResults WHERE student_id = %s",[student_id ])
                                 result = cursor.fetchone()
                                 # convert queryset into a dictionary of column name: value pairs 
@@ -167,6 +174,7 @@ def checkResult (request):
                 }
       
     return render (request, 'results/checkresult.html', context)
+
 
 
 def signupView(request):
